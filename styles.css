@@ -17,7 +17,7 @@ body {
 }
 
 h2 {
-    align-self: center;
+    padding-top: .5em;
 }
 
 h1 {
@@ -45,3 +45,21 @@ h1 {
     grid-template-columns: repeat(3, 200px);
     grid-template-rows: repeat(3, 200px);
 }
+
+@keyframes flash {
+    0% {
+      
+    }
+    
+    50% {
+      background-color: yellow;
+    }
+    
+    75%{
+      background-color:red;      
+    }
+    
+    100% { 
+      
+    }
+  }

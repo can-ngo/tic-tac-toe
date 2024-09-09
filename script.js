@@ -4,7 +4,7 @@ const game = (function() {
         ['', '', ''],
         ['', '', '']
     ]
-
+    
     let isXturn = false;
 
     const clear = () => {
@@ -13,23 +13,22 @@ const game = (function() {
     }
 
     const place = (i, j) => {
-        if (!board[i][j]) {
-            if ( isXturn ) {
-                board[i][j] = 'x';
-                isXturn = !isXturn;
-                console.log(board);
+            if (!board[i][j]) {
+                if ( isXturn ) {
+                    board[i][j] = 'x';
+                    isXturn = !isXturn;
+                    console.log(board);
+                } else {
+                    board[i][j] = 'o'
+                    isXturn = !isXturn;
+                    console.log(board);
+                }
+    
             } else {
-                board[i][j] = 'o'
-                isXturn = !isXturn;
-                console.log(board);
-            }
-
-        } else {
-            alert('Not correct position')
-        }
-        
+                alert('Not correct position')
+            }         
     }
-
+    
     const checkWin = () => {
         let whoWin;
         let capture = [];
@@ -50,7 +49,7 @@ const game = (function() {
         }
         return whoWin;
     }
-    
+
     return {board, place, clear, isXturn, checkWin}
 })();
 
@@ -70,13 +69,13 @@ const displayController = (function () {
     
     cells.forEach( cell => {
         cell.addEventListener('click', e => {
-            let [x , y] = cell.id.split('-').map(Number);
-            game.place(x, y);
-            cell.textContent = game.board[x][y];
-            console.log(game.checkWin())
-            h2.textContent = game.checkWin() ? `The winner is: ${game.checkWin()}`:'';
-            if (game.checkWin()){
-                game.clear();
+            if (!game.checkWin()) {
+                let [x , y] = cell.id.split('-').map(Number);
+                game.place(x, y);
+                cell.textContent = game.board[x][y];
+                console.log(game.checkWin())
+                h2.textContent = game.checkWin() ? `${game.checkWin().toUpperCase()} is the winner`:'';
+                h2.style.animation = game.checkWin() ? 'flash .5s infinite linear' : '';
             }
         })
     })
