@@ -63,3 +63,24 @@ h1 {
       
     }
   }
+
+@media only screen and (max-width: 438px) {
+    .board-div .cell {
+        border: 1px solid black;
+        font-size: 5em;
+        font-weight: 700;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+    
+    .board-div {
+        background-color: antiquewhite;
+        padding: 20px;
+        justify-content: center;
+        display: grid;
+        grid-template-columns: repeat(3, 100px);
+        grid-template-rows: repeat(3, 100px);
+    }
+}

@@ -64,9 +64,12 @@ const displayController = (function () {
             boardDiv.appendChild(newDiv);
         })
     })
+    
+    const resetBtn = document.createElement('button');
+    resetBtn.textContent = "Reset Game"
 
     const cells = Array.from(document.querySelectorAll('.cell'));
-    
+
     cells.forEach( cell => {
         cell.addEventListener('click', e => {
             if (!game.checkWin()) {
@@ -74,11 +77,22 @@ const displayController = (function () {
                 game.place(x, y);
                 cell.textContent = game.board[x][y];
                 console.log(game.checkWin())
-                h2.textContent = game.checkWin() ? `${game.checkWin().toUpperCase()} is the winner`:'';
+                h2.textContent = game.checkWin() ? `${game.checkWin().toUpperCase()} is the winner! `:'';
                 h2.style.animation = game.checkWin() ? 'flash .5s infinite linear' : '';
+            } else {
+                h2.appendChild(resetBtn);
             }
         })
     })
 
+    resetBtn.addEventListener('click', () => {
+        game.clear();
+        game.checkWin();
+        cells.forEach( cell => {
+            cell.textContent = '';
+        })
+        h2.textContent = '';
+        h2.style.animation = '';
+    })
 
 })();
